@@ -14,35 +14,35 @@ O objetivo central desta investigação consiste em avaliar sistematicamente com
 
 ## 🔬 Fase 1: Avaliação Empírica de Agentes Unimodais para Geração de Código
 
-A fase preliminar da investigação concentra-se na conceção de um agente prototípico e na condução de um estudo empírico comparativo entre distintas famílias de modelos e estratégias formais de engenharia de *prompting*[cite: 1].
+A fase preliminar da investigação concentra-se na conceção de um agente prototípico e na condução de um estudo empírico comparativo entre distintas famílias de modelos e estratégias formais de engenharia de *prompting*.
 
 ### 1. Modelos Submetidos a Avaliação
-A amostragem engloba modelos compactos destinados a inferência local (*SLMs - Small Language Models*) e modelos proprietários de larga escala operados em nuvem (*LLMs - Large Language Models*)[cite: 1]:
-* **SLMs (Inferência Local via Ollama):** LLaMA 7B, LLaMA 13B, Code Llama, Qwen2.5-Coder 7B, Gemma 3 4B, entre outros (priorizando a privacidade de dados, soberania da informação e ausência de custos transacionais por *token*)[cite: 1].
-* **LLMs (Serviços Gerenciados em Nuvem / API):** Ecossistemas OpenAI (ChatGPT/GPT OSS), Google (Gemini), Anthropic (Claude), DeepSeek, Kimi K3 e Nemotron[cite: 1].
+A amostragem engloba modelos compactos destinados a inferência local (*SLMs - Small Language Models*) e modelos proprietários de larga escala operados em nuvem (*LLMs - Large Language Models*):
+* **SLMs (Inferência Local via Ollama):** LLaMA 7B, LLaMA 13B, Code Llama, Qwen2.5-Coder 7B, Gemma 3 4B, entre outros (priorizando a privacidade de dados, soberania da informação e ausência de custos transacionais por *token*).
+* **LLMs (Serviços Gerenciados em Nuvem / API):** Ecossistemas OpenAI (ChatGPT/GPT OSS), Google (Gemini), Anthropic (Claude), DeepSeek, Kimi K3 e Nemotron.
 
 ### 2. Quadro Metodológico e Protocolo de Avaliação
-* **Arquitetura do Agente:** Implementação modular baseada no ecossistema **LangChain**, assegurando a rastreabilidade e padronização dos fluxos de chamada e execução determinística[cite: 1].
-* **Benchmark de Referência:** **HumanEval** (OpenAI), constituído por 164 problemas algorítmicos em Python, validados por asserções e suítes formais de testes funcionais[cite: 1].
+* **Arquitetura do Agente:** Implementação modular baseada no ecossistema **LangChain**, assegurando a rastreabilidade e padronização dos fluxos de chamada e execução determinística.
+* **Benchmark de Referência:** **HumanEval** (OpenAI), constituído por 164 problemas algorítmicos em Python, validados por asserções e suítes formais de testes funcionais.
 
 ### 3. Estratégias de *Prompting* Investigadas
-Com o intuito de caracterizar a sensibilidade e a capacidade de inferência dos modelos, são avaliadas as seguintes diretivas experimentais[cite: 1]:
-* **Zero-Shot:** Disponibilização estrita da assinatura da função acompanhada da respetiva especificação formal (*docstring*)[cite: 1].
-* **One-Shot:** Inclusão do enunciado da tarefa acompanhado de um caso exemplar com resolução válida[cite: 1].
-* **Few-Shot ($k \in \{2, 5, 10\}$):** Inclusão de múltiplos exemplos resolvidos contextualmente antes da tarefa alvo[cite: 1]. Todos os modelos recebem rigorosamente o mesmo conjunto e ordem de exemplos, garantindo a reprodutibilidade do ensaio[cite: 1].
+Com o intuito de caracterizar a sensibilidade e a capacidade de inferência dos modelos, são avaliadas as seguintes diretivas experimentais:
+* **Zero-Shot:** Disponibilização estrita da assinatura da função acompanhada da respetiva especificação formal (*docstring*).
+* **One-Shot:** Inclusão do enunciado da tarefa acompanhado de um caso exemplar com resolução válida.
+* **Few-Shot ($k \in \{2, 5, 10\}$):** Inclusão de múltiplos exemplos resolvidos contextualmente antes da tarefa alvo[cite: 1]. Todos os modelos recebem rigorosamente o mesmo conjunto e ordem de exemplos, garantindo a reprodutibilidade do ensaio.
 * **Cadeia de Raciocínio (Chain-of-Thought - CoT):** Instruções explícitas destinadas a induzir reflexão analítica prévia à emissão do artefacto final[cite: 1]:
   * **Variante A (Deliberação Interna):**
-    1. *Reason carefully about the problem internally before producing the solution.*[cite: 1]
-    2. *Return only the final Python code.*[cite: 1]
+    1. *Reason carefully about the problem internally before producing the solution.*
+    2. *Return only the final Python code.*
   * **Variante B (Decomposição Analítica Estruturada):**
-    1. *Analyze the problem step by step before writing the code:*[cite: 1]
-    2. *Identify the requirements.*[cite: 1]
-    3. *Consider edge cases.*[cite: 1]
-    4. *Develop an algorithm.*[cite: 1]
-    5. *Write the Python implementation.*[cite: 1]
-    6. *Verify the implementation against the specification.*[cite: 1]
-    7. *Then provide the final code.*[cite: 1]
-* **Few-Shot combinada com CoT:** Associação de casos exemplares com o mapeamento explícito do raciocínio analítico passo a passo que antecede a solução de código[cite: 1].
+    1. *Analyze the problem step by step before writing the code:*
+    2. *Identify the requirements.*
+    3. *Consider edge cases.*
+    4. *Develop an algorithm.*
+    5. *Write the Python implementation.*
+    6. *Verify the implementation against the specification.*
+    7. *Then provide the final code.*
+* **Few-Shot combinada com CoT:** Associação de casos exemplares com o mapeamento explícito do raciocínio analítico passo a passo que antecede a solução de código.
 
 ---
 

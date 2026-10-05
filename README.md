@@ -14,34 +14,34 @@ Esta pesquisa investiga como arquiteturas multiagentes autônomas e colaborativa
 
 ## 🔬 Fase 1: Protótipo de um Agente para Geração de Código
 
-A etapa inicial concentra-se no desenvolvimento de um agente individual para geração de código e na condução de um estudo empírico comparativo entre diferentes categorias de modelos e técnicas de engenharia de prompt[cite: 1].
+A etapa inicial concentra-se no desenvolvimento de um agente individual para geração de código e na condução de um estudo empírico comparativo entre diferentes categorias de modelos e técnicas de engenharia de prompt.
 
 ### 1. Modelos em Avaliação
-A análise engloba tanto modelos de pequeno porte para inferência local (*SLMs - Small Language Models*) quanto modelos proprietários em larga escala (*LLMs - Large Language Models*)[cite: 1]:
-* **SLMs (Execução Local / Ollama):** LLaMA 7B, LLaMA 13B, Code Llama, Qwen2.5-Coder 7B, Gemma, entre outros[cite: 1].
-* **LLMs (Serviços em Nuvem / API):** Família ChatGPT (OpenAI), Gemini (Google), Claude (Anthropic), DeepSeek, Kimi K3, Nemotron, entre outros[cite: 1].
+A análise engloba tanto modelos de pequeno porte para inferência local (*SLMs - Small Language Models*) quanto modelos proprietários em larga escala (*LLMs - Large Language Models*):
+* **SLMs (Execução Local / Ollama):** LLaMA 7B, LLaMA 13B, Code Llama, Qwen2.5-Coder 7B, Gemma, entre outros.
+* **LLMs (Serviços em Nuvem / API):** Família ChatGPT (OpenAI), Gemini (Google), Claude (Anthropic), DeepSeek, Kimi K3, Nemotron, entre outros.
 
 ### 2. Framework e Benchmark
-* **Construção do Agente:** Desenvolvimento do protótipo com **LangChain** para padronização de cadeias de chamada e execução[cite: 1].
-* **Benchmark de Avaliação:** **HumanEval** (OpenAI), composto por 164 desafios de programação em Python validados por suítes formais de testes unitários[cite: 1].
+* **Construção do Agente:** Desenvolvimento do protótipo com **LangChain** para padronização de cadeias de chamada e execução.
+* **Benchmark de Avaliação:** **HumanEval** (OpenAI), composto por 164 desafios de programação em Python validados por suítes formais de testes unitários.
 
 ### 3. Estratégias de Prompting em Estudo
-Para mensurar a sensibilidade e a robustez dos modelos, são avaliadas as seguintes abordagens[cite: 1]:
-* **Zero-Shot:** Envio estrito apenas da assinatura da função e de sua *docstring*[cite: 1].
-* **One-Shot:** Envio da tarefa acompanhada de 1 exemplo resolvido[cite: 1].
-* **Few-Shot (2, 5 e 10 exemplos):** Envio da tarefa com múltiplos exemplos resolvidos[cite: 1]. Todos os modelos recebem rigorosamente os mesmos exemplos e na mesma ordem[cite: 1].
-* **Chain-of-Thought (CoT):** Inclusão de instruções explícitas para raciocínio analítico antes da geração do código[cite: 1]:
+Para mensurar a sensibilidade e a robustez dos modelos, são avaliadas as seguintes abordagens:
+* **Zero-Shot:** Envio estrito apenas da assinatura da função e de sua *docstring*.
+* **One-Shot:** Envio da tarefa acompanhada de 1 exemplo resolvido.
+* **Few-Shot (2, 5 e 10 exemplos):** Envio da tarefa com múltiplos exemplos resolvidos. Todos os modelos recebem rigorosamente os mesmos exemplos e na mesma ordem.
+* **Chain-of-Thought (CoT):** Inclusão de instruções explícitas para raciocínio analítico antes da geração do código:
   * **Possibilidade A (Raciocínio Interno):**
-    1. *Reason carefully about the problem internally before producing the solution.*[cite: 1]
-    2. *Return only the final Python code.*[cite: 1]
+    1. *Reason carefully about the problem internally before producing the solution.*
+    2. *Return only the final Python code.*
   * **Possibilidade B (Raciocínio Estruturado Passo a Passo):**
-    1. *Analyze the problem step by step before writing the code:*[cite: 1]
-    2. *Identify the requirements.*[cite: 1]
-    3. *Consider edge cases.*[cite: 1]
-    4. *Develop an algorithm.*[cite: 1]
-    5. *Write the Python implementation.*[cite: 1]
-    6. *Verify the implementation against the specification.*[cite: 1]
-    7. *Then provide the final code.*[cite: 1]
+    1. *Analyze the problem step by step before writing the code:*
+    2. *Identify the requirements.*
+    3. *Consider edge cases.*
+    4. *Develop an algorithm.*
+    5. *Write the Python implementation.*
+    6. *Verify the implementation against the specification.*
+    7. *Then provide the final code.*
 * **Few-Shot + CoT:** Combinação de exemplos práticos contendo o raciocínio intermediário passo a passo antes da solução final[cite: 1].
 
 ---

@@ -1,58 +1,58 @@
 # Integração de Sistemas Multiagentes baseados em LLMs ao Ciclo de Vida de Desenvolvimento de Software
 
-Repositório destinado à documentação, implementação e análise experimental das atividades desenvolvidas no âmbito da pesquisa de **Iniciação Científica (IC)** sobre a aplicação de **Sistemas Multiagentes (MAS)** e Modelos de Linguagem (LLMs e SLMs) às etapas do **Ciclo de Vida de Desenvolvimento de Software (SDLC)**.
+Repositório institucional e técnico dedicado à documentação, implementação e validação experimental das atividades desenvolvidas no âmbito da investigação de **Iniciação Científica (IC)** sobre a aplicação de **Sistemas Multiagentes (MAS - Multi-Agent Systems)** baseados em Modelos de Linguagem (*Large and Small Language Models* - LLMs/SLMs) no **Ciclo de Vida de Desenvolvimento de Software (SDLC - Software Development Life Cycle)**.
 
 ---
 
-## 📌 Contexto e Objetivos
+## 📌 Contextualização e Objetivos
 
-O avanço de modelos de linguagem generativos abriu novos paradigmas para a automação na Engenharia de Software. No entanto, o uso isolado de modelos monolíticos frequentemente enfrenta desafios como alucinações sintáticas/semânticas, falta de contexto do projeto e baixa aderência a requisitos complexos.
+A introdução de modelos de linguagem generativos estabeleceu novos paradigmas de automatização na Engenharia de Software. Não obstante o potencial demonstrado, a utilização isolada de modelos monolíticos apresenta limitações críticas, tais como a emergência de alucinações sintáticas e semânticas, a perda de contexto arquitetural alargado e a vulnerabilidade na adesão a requisitos funcionais complexos.
 
-Esta pesquisa investiga como arquiteturas multiagentes autônomas e colaborativas podem ser integradas ao SDLC para atuar de ponta a ponta — desde a análise de requisitos até a implementação, validação e revisão de código.
-
----
-
-## 🔬 Fase 1: Protótipo de um Agente para Geração de Código
-
-A etapa inicial concentra-se no desenvolvimento de um agente individual para geração de código e na condução de um estudo empírico comparativo entre diferentes categorias de modelos e técnicas de engenharia de prompt.
-
-### 1. Modelos em Avaliação
-A análise engloba tanto modelos de pequeno porte para inferência local (*SLMs - Small Language Models*) quanto modelos proprietários em larga escala (*LLMs - Large Language Models*):
-* **SLMs (Execução Local / Ollama):** LLaMA 7B, LLaMA 13B, Code Llama, Qwen2.5-Coder 7B, Gemma, entre outros.
-* **LLMs (Serviços em Nuvem / API):** Família ChatGPT (OpenAI), Gemini (Google), Claude (Anthropic), DeepSeek, Kimi K3, Nemotron, entre outros.
-
-### 2. Framework e Benchmark
-* **Construção do Agente:** Desenvolvimento do protótipo com **LangChain** para padronização de cadeias de chamada e execução.
-* **Benchmark de Avaliação:** **HumanEval** (OpenAI), composto por 164 desafios de programação em Python validados por suítes formais de testes unitários.
-
-### 3. Estratégias de Prompting em Estudo
-Para mensurar a sensibilidade e a robustez dos modelos, são avaliadas as seguintes abordagens:
-* **Zero-Shot:** Envio estrito apenas da assinatura da função e de sua *docstring*.
-* **One-Shot:** Envio da tarefa acompanhada de 1 exemplo resolvido.
-* **Few-Shot (2, 5 e 10 exemplos):** Envio da tarefa com múltiplos exemplos resolvidos. Todos os modelos recebem rigorosamente os mesmos exemplos e na mesma ordem.
-* **Chain-of-Thought (CoT):** Inclusão de instruções explícitas para raciocínio analítico antes da geração do código:
-  * **Possibilidade A (Raciocínio Interno):**
-    1. *Reason carefully about the problem internally before producing the solution.*
-    2. *Return only the final Python code.*
-  * **Possibilidade B (Raciocínio Estruturado Passo a Passo):**
-    1. *Analyze the problem step by step before writing the code:*
-    2. *Identify the requirements.*
-    3. *Consider edge cases.*
-    4. *Develop an algorithm.*
-    5. *Write the Python implementation.*
-    6. *Verify the implementation against the specification.*
-    7. *Then provide the final code.*
-* **Few-Shot + CoT:** Combinação de exemplos práticos contendo o raciocínio intermediário passo a passo antes da solução final[cite: 1].
+O objetivo central desta investigação consiste em avaliar sistematicamente como arquiteturas colaborativas multiagentes podem mitigar tais limitações, integrando-se de forma coordenada e modular às diversas etapas do SDLC — desde a elicitação e especificação de requisitos até à síntese algorítmica, verificação formal por testes unitários e auditoria de código.
 
 ---
 
-## 📊 Resultados Preliminares: Etapa Zero-Shot
+## 🔬 Fase 1: Avaliação Empírica de Agentes Unimodais para Geração de Código
 
-Os testes iniciais foram consolidados a partir da execução integral dos 164 problemas do *HumanEval* sob a estratégia **Zero-Shot** (apenas função + *docstring*).
+A fase preliminar da investigação concentra-se na conceção de um agente prototípico e na condução de um estudo empírico comparativo entre distintas famílias de modelos e estratégias formais de engenharia de *prompting*[cite: 1].
+
+### 1. Modelos Submetidos a Avaliação
+A amostragem engloba modelos compactos destinados a inferência local (*SLMs - Small Language Models*) e modelos proprietários de larga escala operados em nuvem (*LLMs - Large Language Models*)[cite: 1]:
+* **SLMs (Inferência Local via Ollama):** LLaMA 7B, LLaMA 13B, Code Llama, Qwen2.5-Coder 7B, Gemma 3 4B, entre outros (priorizando a privacidade de dados, soberania da informação e ausência de custos transacionais por *token*)[cite: 1].
+* **LLMs (Serviços Gerenciados em Nuvem / API):** Ecossistemas OpenAI (ChatGPT/GPT OSS), Google (Gemini), Anthropic (Claude), DeepSeek, Kimi K3 e Nemotron[cite: 1].
+
+### 2. Quadro Metodológico e Protocolo de Avaliação
+* **Arquitetura do Agente:** Implementação modular baseada no ecossistema **LangChain**, assegurando a rastreabilidade e padronização dos fluxos de chamada e execução determinística[cite: 1].
+* **Benchmark de Referência:** **HumanEval** (OpenAI), constituído por 164 problemas algorítmicos em Python, validados por asserções e suítes formais de testes funcionais[cite: 1].
+
+### 3. Estratégias de *Prompting* Investigadas
+Com o intuito de caracterizar a sensibilidade e a capacidade de inferência dos modelos, são avaliadas as seguintes diretivas experimentais[cite: 1]:
+* **Zero-Shot:** Disponibilização estrita da assinatura da função acompanhada da respetiva especificação formal (*docstring*)[cite: 1].
+* **One-Shot:** Inclusão do enunciado da tarefa acompanhado de um caso exemplar com resolução válida[cite: 1].
+* **Few-Shot ($k \in \{2, 5, 10\}$):** Inclusão de múltiplos exemplos resolvidos contextualmente antes da tarefa alvo[cite: 1]. Todos os modelos recebem rigorosamente o mesmo conjunto e ordem de exemplos, garantindo a reprodutibilidade do ensaio[cite: 1].
+* **Cadeia de Raciocínio (Chain-of-Thought - CoT):** Instruções explícitas destinadas a induzir reflexão analítica prévia à emissão do artefacto final[cite: 1]:
+  * **Variante A (Deliberação Interna):**
+    1. *Reason carefully about the problem internally before producing the solution.*[cite: 1]
+    2. *Return only the final Python code.*[cite: 1]
+  * **Variante B (Decomposição Analítica Estruturada):**
+    1. *Analyze the problem step by step before writing the code:*[cite: 1]
+    2. *Identify the requirements.*[cite: 1]
+    3. *Consider edge cases.*[cite: 1]
+    4. *Develop an algorithm.*[cite: 1]
+    5. *Write the Python implementation.*[cite: 1]
+    6. *Verify the implementation against the specification.*[cite: 1]
+    7. *Then provide the final code.*[cite: 1]
+* **Few-Shot combinada com CoT:** Associação de casos exemplares com o mapeamento explícito do raciocínio analítico passo a passo que antecede a solução de código[cite: 1].
+
+---
+
+## 📊 Resultados Preliminares: Protocolo Experimental *Zero-Shot*
+
+Os dados a seguir compilam a execução exaustiva das 164 tarefas do *benchmark* **HumanEval** sob o protocolo **Zero-Shot** (avaliação direta sem indução prévia).
 
 ### Tabela Comparativa de Desempenho
 
-| Modelo | Categoria | Pass@1 (%) | Sucesso | Falha | Latência Média (s) | Tokens Médios / Resposta | Complexidade Ciclomática (CC) | Índice de Manutenibilidade (MI) |
+| Modelo Avaliado | Ambiente / Categoria | Pass@1 (%) | Sucesso (Aprovadas) | Falhas | Latência Média (s) | Tokens Médios / Resposta | Complexidade Ciclomática (CC) | Índice de Manutenibilidade (MI) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Nemotron 3 Ultra 550B** | Cloud / API | **90,85%** | 149 / 164 | 15 / 164 | 15,06 s | 877,4 | 3,76 | 82,00 |
 | **Gemini 3.5 Flash Lite** | Cloud / API | **88,41%** | 145 / 164 | 19 / 164 | **1,24 s** | 138,7 | 3,55 | 82,38 |
@@ -63,23 +63,23 @@ Os testes iniciais foram consolidados a partir da execução integral dos 164 pr
 | **Gemma 3 4B** | Local (Ollama) | **68,90%** | 113 / 164 | 51 / 164 | 4,17 s | 228,2 | 4,04 | 87,50 |
 | **Llama 3.1 8B** | Local (Ollama) | **68,90%** | 113 / 164 | 51 / 164 | 6,63 s | 325,7 | 3,41 | 80,39 |
 
-### Destaques dos Primeiros Testes:
-1. **Viabilidade dos SLMs Especializados:** O `Qwen2.5-Coder 7B` local alcançou 86,59% de $Pass@1$, superando modelos gerais em nuvem de porte significativamente superior e apresentando o melhor Índice de Manutenibilidade Médio (87,96).
-2. **Trade-off Latência vs. Eficácia:** Modelos como o `Gemini 3.5 Flash Lite` combinam alta taxa de assertividade (88,41%) com tempos de resposta expressivamente baixos (~1,24 s), perfil ideal para nós de iteração rápida em agentes de desenvolvimento.
-3. **Complexidade Estrutural:** Todos os modelos mantiveram a Complexidade Ciclomática média em níveis saudáveis ($< 5$), refletindo implementações concisas e diretas.
+### Análise e Discussão dos Resultados
+1. **Eficácia de SLMs Especializados:** O modelo local `Qwen2.5-Coder 7B` atingiu uma taxa de aprovação direta ($Pass@1$) de **86,59%**, superando modelos proprietários de maior escala parametral e registando o maior Índice de Manutenibilidade Médio (**87,96**). Isto evidencia que a especialização de domínio compensa eficazmente a redução na contagem de parâmetros.
+2. **Compromisso entre Latência e Assertividade:** O `Gemini 3.5 Flash Lite` demonstrou um perfil altamente favorável, associando reduzida latência de inferência (1,24 s) a um $Pass@1$ competitivo (88,41%), o que o qualifica como forte candidato para agentes que demandam validações cíclicas e rápidas no pipeline.
+3. **Métricas de Qualidade de Software:** Todos os modelos avaliados mantiveram a Complexidade Ciclomática média em níveis recomendáveis ($CC < 5$), indicando a geração de soluções algorítmicas concisas, modulares e de baixa densidade de desvios condicionais.
 
 ---
 
-## 📁 Organização do Repositório
+## 📁 Estrutura do Repositório
 
 ```plaintext
 .
 ├── data/
-│   ├── raw/                               # Saídas brutas de inferência dos modelos
-│   └── Resultados_do_Benchmark_HumanEval_ZeroShot(LLM-SLM).xlsx  # Dados consolidados
+│   ├── raw/                                                      # Registo bruto das respostas das inferências
+│   └── Resultados_do_Benchmark_HumanEval_ZeroShot(LLM-SLM).xlsx  # Dados analíticos e consolidados
 ├── src/
-│   ├── agent.py                           # Definição do agente com LangChain
-│   ├── prompt_templates.py                # Templates (Zero-shot, Few-shot, CoT)
-│   └── evaluator.py                       # Integração com o avaliador HumanEval
-├── requirements.txt                       # Dependências do projeto
+│   ├── agent.py                                                  # Instanciação do agente e cadeias de chamada
+│   ├── prompt_templates.py                                       # Especificação dos templates de inferência
+│   └── evaluator.py                                              # Módulo de submissão e validação no HumanEval
+├── requirements.txt                                              # Dependências do ecossistema de testes
 └── README.md
